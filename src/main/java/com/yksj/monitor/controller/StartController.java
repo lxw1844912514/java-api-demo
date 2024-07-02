@@ -3,6 +3,8 @@ package com.yksj.monitor.controller;
 import com.yksj.monitor.entity.User;
 import com.yksj.monitor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +19,10 @@ public class StartController {
     @RequestMapping("/abc")
     public Animal getName(){
         return  new Animal("dog",5);
+    }
+    @GetMapping("/hello")
+    public List<String> hello(){
+        return List.of("hello","world");
     }
 
     @RequestMapping("/userList")
