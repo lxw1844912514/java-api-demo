@@ -22,7 +22,10 @@ public class StartController {
     }
     @GetMapping("/hello")
     public List<String> hello(){
-        return List.of("hello","world");
+        List<String> strings = new java.util.ArrayList<>();
+        strings.add("hello");
+        strings.add("world");
+        return strings;
     }
 
     @RequestMapping("/userList")
