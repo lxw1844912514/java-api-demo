@@ -1,9 +1,13 @@
 package com.yksj.monitor.entity;
 
+import lombok.Data;
+
+@Data
+//@JsonIgnoreProperties(value={ "hibernateLazyInitializer", "handler"})
 public class User {
-    private int id;
+    private Integer id;
     private String name;
-    private int age;
+    private Integer age;
     private String email;
 
     //构造函数

@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-//@MapperScan("com.yksj.monitor.mapper")
+@MapperScan("com.yksj.monitor.mapper")
 //@ComponentScan("com.yksj.monitor.mapper")
 public class MonitorApplication {
 
