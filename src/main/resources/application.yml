@@ -2,15 +2,45 @@ server:
   port: 8001
 
 spring:
-  # ???????
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/monitor?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/monitor?characterEncoding=utf-8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
     password: 123456
+  banner:
+    location: banner/fozu.txt
+    #  mvc:
+    #    static-path-pattern: /haha/**
+    #  访问URL路径：http://localhost:8001/haha/3.jpg， 访问的是static 目录下的3.jpg 图片，/haha/** 定义的是路由前缀，
+    #  http://localhost:8001/  默认访问的是static 目录下单 index.html 文件
 
-# mybatis????
+    #  mvc:
+    #    static-path-pattern: /static/**
+
+    #静态资源文件配置，默认是 static 目录
+  web:
+    resources:
+      static-locations:
+        [ classpath:/haha/ ]
+
+  # 配置日期格式化
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+
+
+# mybatis
 mybatis:
-  mapper-locations:
-    classpath:mapper/*.xml
+  mapper-locations: classpath:mapper/*.xml
   # type-aliases-package:com.yksj.model
+
+#自动义配置
+self:
+  custom:
+    config:
+      sdkSecret: 123
+      host: https://www.baidu.com
+      port: ${server.port}
+
+
