@@ -8,7 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.sql.SQLOutput;
 
 //@Controller
@@ -73,4 +75,17 @@ public class HelloController {
         return JSONResult.ok(student1);
     }
 
+
+    //    上传文件
+    @PostMapping("upload")
+    public String uploadFile(MultipartFile image) throws Exception {
+        image.transferTo(new File("/tmp/" + image.getOriginalFilename()));
+        return "上传成功";
+    }
+
+    @PostMapping("upload2")
+    public String uploadFile2(MultipartFile image) throws Exception {
+        image.transferTo(new File("/tmp/" + image.getOriginalFilename()));
+        return "上传成功";
+    }
 }

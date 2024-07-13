@@ -77,11 +77,11 @@
             <version>2.3.1</version>
             <scope>test</scope>
         </dependency>
-<!--        sprint boot 提供的开发者工具-->
+        <!--        sprint boot 提供的开发者工具-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
-            <optional> true</optional>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -100,6 +100,12 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+        <!--spring boot 官方推荐的模版-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
 
         <dependency>
             <groupId>mysql</groupId>

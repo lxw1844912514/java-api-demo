@@ -8,6 +8,11 @@
 <body>
 <p>URl: http://localhost:8001/index.html</p>
 <h1>test is ok!</h1>
-<img src="./4.jpeg" alt="" width="30%" height="25%">
+<!--<img src="./4.jpeg" alt="" width="30%" height="25%">-->
+
+<form action="/upload" method="POST" enctype="multipart/form-data">
+    图片 <input type="file" name="image"><br>
+    <input type="submit" value="提交">
+</form>
 </body>
 </html>
