@@ -1,4 +1,4 @@
-package com.yksj.monitor;
+package com.yksj.monitor.exception;
 
 import com.yksj.monitor.utils.JSONResult;
 import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException;
@@ -17,9 +17,15 @@ public class GraceExceptionHandler {
     @Value("${spring.servlet.multipart.max-file-size}")
     private String maxFileSize;
 
-//    @ExceptionHandler(FileSizeLimitExceededException.class) //这里拦截异常，如果不想拦截，注释掉即可
+    @ExceptionHandler(FileSizeLimitExceededException.class) //这里拦截异常，如果不想拦截，注释掉即可
     @ResponseBody
     public JSONResult ReturnFileSizeLimit(FileSizeLimitExceededException e) {
         return JSONResult.errorMsg("文件大小不能超出" + maxFileSize);
+    }
+
+    @ExceptionHandler(CustomException.class) //这里拦截异常，如果不想拦截，注释掉即可
+    @ResponseBody
+    public JSONResult returnCustomException(CustomException e) {
+        return JSONResult.errorMsg(e.getMessage());
     }
 }

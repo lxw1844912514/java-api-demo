@@ -1,6 +1,7 @@
 package com.yksj.monitor.controller.Interceptor;
 
 import com.mysql.cj.util.StringUtils;
+import com.yksj.monitor.exception.GraceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,12 +30,14 @@ public class UserInfoInterceptor implements HandlerInterceptor {
         String userToken = request.getHeader("UserToken");
         if (StringUtils.isEmptyOrWhitespaceOnly(userId) || StringUtils.isEmptyOrWhitespaceOnly(userToken)) {
             log.error("用户信息不能为空");
+            GraceException.display("用户信息不能为空");
             return false;
         }
 
         //  userId:1001 userToken:abc123
         if (!userId.equalsIgnoreCase("1001")||!userToken.equalsIgnoreCase("abc123")){
             log.error("用户没有权限");
+            GraceException.display("用户没有权限");
             return false;
         }
 
