@@ -4,6 +4,7 @@ import com.yksj.monitor.entity.MyConfig;
 import com.yksj.monitor.entity.Stu;
 import com.yksj.monitor.entity.Student;
 import com.yksj.monitor.utils.JSONResult;
+import com.yksj.monitor.utils.MyAsyncTask;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,15 +13,19 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.sql.SQLOutput;
+import java.time.LocalDateTime;
 
 //@Controller
 @RestController
 @Slf4j
 public class HelloController {
 
+    @Autowired  MyAsyncTask myAsyncTask;
     //    @ResponseBody
     @RequestMapping("hello")
     public String Hello() {
+        myAsyncTask.pulishAsyncMsg();
+        log.info("跳过一步任务先执行"+ LocalDateTime.now());
         return "hello world-123";
     }
 
@@ -53,6 +58,7 @@ public class HelloController {
 
     @GetMapping("myYmlConfig")
     public Object myYmlConfig() {
+
         return sdkSecret + "\t" + host + ":" + port;
     }
 
