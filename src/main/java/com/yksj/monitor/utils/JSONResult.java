@@ -1,19 +1,20 @@
 package com.yksj.monitor.utils;
 
+import java.util.UUID;
+
 /**
- *
  * @Title: JSONResult.java
  * @Package com.itzixi.utils
  * @Description: 自定义响应数据结构
- * 				本类可提供给 H5/ios/安卓/公众号/小程序 使用
- * 				前端接受此类数据（json object)后，可自行根据业务去实现相关功能
- * 				200：表示成功
- * 				500：表示错误，错误信息在msg字段中
- * 				501：bean验证错误，不管多少个错误都以map形式返回
- * 				502：拦截器拦截到用户token出错
- * 				555：异常抛出信息
- * 				556: 用户qq校验异常
- * 			    557: 校验用户是否在CAS登录，用户门票的校验
+ * 本类可提供给 H5/ios/安卓/公众号/小程序 使用
+ * 前端接受此类数据（json object)后，可自行根据业务去实现相关功能
+ * 200：表示成功
+ * 500：表示错误，错误信息在msg字段中
+ * 501：bean验证错误，不管多少个错误都以map形式返回
+ * 502：拦截器拦截到用户token出错
+ * 555：异常抛出信息
+ * 556: 用户qq校验异常
+ * 557: 校验用户是否在CAS登录，用户门票的校验
  * @Copyright: Copyright (c) 2020
  */
 public class JSONResult {
@@ -30,6 +31,8 @@ public class JSONResult {
     private Object data;
 
 //    private String ok;	// 不使用
+
+    private String RequestId;
 
     public static JSONResult build(Integer status, String msg, Object data) {
         return new JSONResult(status, msg, data);
@@ -79,12 +82,14 @@ public class JSONResult {
         this.status = status;
         this.msg = msg;
         this.data = data;
+        this.RequestId = UUID.randomUUID().toString();
     }
 
     public JSONResult(Integer status, String msg, Object data, String ok) {
         this.status = status;
         this.msg = msg;
         this.data = data;
+        this.RequestId = UUID.randomUUID().toString();
 //        this.ok = ok;
     }
 
@@ -92,6 +97,7 @@ public class JSONResult {
         this.status = 200;
         this.msg = "OK";
         this.data = data;
+        this.RequestId = UUID.randomUUID().toString();
     }
 
 //    public Boolean isOK() {
@@ -121,6 +127,15 @@ public class JSONResult {
     public void setData(Object data) {
         this.data = data;
     }
+
+    public String getRequestId() {
+        return RequestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.RequestId = UUID.randomUUID().toString();
+    }
+
 
 //    public String getOk() {
 //        return ok;

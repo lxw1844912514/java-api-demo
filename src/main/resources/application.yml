@@ -35,10 +35,22 @@ spring:
 
 
 
-# mybatis
+# mybatis 相关的配置
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  # type-aliases-package:com.yksj.model
+  type-aliases-package: com.yksj.entity #所有数据库表逆向后--映射后的实体类【entity/pojo/Bean】
+  mapper-locations: classpath:mapper/*.xml #所有mapper映射的文件所在的目录位置
+#通用mapper配置
+mapper:
+  mappers: com.yksj.monitor.my.mapper.MyMapper  #所有mapper都需要实现的接口
+  not-empty: false #在进行数据库操作的时候，判断一个属性是否为空的时候，是否需要自动追加不为空字符串的判断
+                   # 例如 userName!=null 后面不需要 userName!=""
+  identity: MYSQL  #身份标识
+
+#分页插件助手的配置
+pagehelper:
+  support-methods-arguments: true
+  helper-dialect: mysql #方言
+
 
 #自动义配置
 self:
@@ -47,5 +59,4 @@ self:
       sdkSecret: 123
       host: https://www.baidu.com
       port: ${server.port}
-
 

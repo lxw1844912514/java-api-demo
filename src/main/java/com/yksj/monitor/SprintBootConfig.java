@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
 public class SprintBootConfig {
     @Bean //将Stu 放入sprintboot 容器内
     public Stu stu(){
-        return new Stu("lxw",18);
+//        return new Stu(1,"lxw",18);
+        return new Stu();
     }
 }
