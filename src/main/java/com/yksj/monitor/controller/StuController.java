@@ -1,6 +1,7 @@
 package com.yksj.monitor.controller;
 
 import com.yksj.monitor.entity.Stu;
+import com.yksj.monitor.impl.StuServiceImpl;
 import com.yksj.monitor.service.StuService;
 import com.yksj.monitor.utils.JSONResult;
 import lombok.extern.slf4j.Slf4j;
@@ -55,17 +56,19 @@ public class StuController {
     }
 
     @Autowired
-    private StuService stuService;
+//    private StuService stuService;
+    private StuServiceImpl stuService; //todo::区别
 
     @PostMapping("addStu")
     public JSONResult addStu() {
         String randName = UUID.randomUUID().toString();
-//
+
         Stu stu = new Stu();
 //        stu.setId(111);
         stu.setName(randName);
         stu.setAge(1);
         stuService.savaStu(stu);
+        stuService.test();
 
         log.info(randName);
         return JSONResult.ok();
