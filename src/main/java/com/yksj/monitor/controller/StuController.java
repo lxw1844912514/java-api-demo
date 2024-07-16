@@ -1,14 +1,22 @@
 package com.yksj.monitor.controller;
 
 import com.yksj.monitor.entity.Stu;
+import com.yksj.monitor.entity.bo.StuBo;
 import com.yksj.monitor.impl.StuServiceImpl;
 import com.yksj.monitor.service.StuService;
 import com.yksj.monitor.utils.JSONResult;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -72,5 +80,35 @@ public class StuController {
 
         log.info(randName);
         return JSONResult.ok();
+    }
+
+    //    通过postman 传递数据
+    @PostMapping("addStu2")
+    public JSONResult addStu2(@Valid @RequestBody StuBo stuBo,
+                              BindingResult result) {
+
+//        验证
+        if (result.hasErrors()) {
+            Map<String, String> map = getErrors(result);
+            return JSONResult.errorMap(map);
+        }
+
+        Stu stu = new Stu();
+        BeanUtils.copyProperties(stuBo, stu); // 将一个对象中的属性拷贝到另外一个对象里面，两个对象属性必须一致
+        stuService.savaStu(stu);
+
+        return JSONResult.ok();
+    }
+
+    //    获取错误
+    public Map<String, String> getErrors(BindingResult result) {
+        Map<String, String> map = new HashMap<>();
+        List<FieldError> errorList = result.getFieldErrors();
+        for (FieldError error : errorList) {
+            String field = error.getField();
+            String msg = error.getDefaultMessage();
+            map.put(field, msg);
+        }
+        return map;
     }
 }
