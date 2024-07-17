@@ -112,4 +112,19 @@ public class StuController {
         }
         return map;
     }
+
+    //    根据ID查询用户信息 {{host}}/stu/getStuById?stuId=111
+    @GetMapping("getStuById")
+    public JSONResult getStuById(String stuId) {
+        Stu stu = stuService.queryById(stuId);
+        return JSONResult.ok(stu);
+    }
+
+    // 根据条件查询结果集   {{host}}/stu/getStuByCondition?name=test&age=1
+    @GetMapping("getStuByCondition")
+    public JSONResult getStuByCondition(String name, Integer age) {
+        List<Stu> stuList = stuService.queryByCondition(name, age);
+//        List<Stu> stuList = stuService.queryByCondition("lxw",33);
+        return JSONResult.ok(stuList);
+    }
 }
