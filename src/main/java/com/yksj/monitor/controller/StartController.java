@@ -1,5 +1,6 @@
 package com.yksj.monitor.controller;
 
+import com.yksj.monitor.entity.Animal;
 import com.yksj.monitor.entity.User;
 import com.yksj.monitor.mapper.UserMapper;
 import com.yksj.monitor.service.UserService;

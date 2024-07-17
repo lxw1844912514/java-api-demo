@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
 
 @RestController
 @Slf4j
@@ -86,8 +88,7 @@ public class StuController {
     @PostMapping("addStu2")
     public JSONResult addStu2(@Valid @RequestBody StuBo stuBo,
                               BindingResult result) {
-
-//        验证
+        //  验证
         if (result.hasErrors()) {
             Map<String, String> map = getErrors(result);
             return JSONResult.errorMap(map);
