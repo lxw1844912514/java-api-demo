@@ -203,7 +203,7 @@ public class StuController {
      * @return
      */
     @PostMapping("delStu")
-    public JSONResult deleteStu(Stu stu, Integer stuId,String name) {
+    public JSONResult deleteStu(Stu stu, Integer stuId, String name) {
 
         stu.setId(stuId);
         stu.setName(name);
@@ -214,5 +214,11 @@ public class StuController {
         String msg = (res > 0) ? "删除成功" : "删除失败";
         log.info("删除条数：{} 删除结果：{}", res, msg);
         return JSONResult.ok(msg);
+    }
+
+    @PostMapping("testTrans")
+    public JSONResult testTrans() {
+        stuService.testTrans();
+        return JSONResult.ok();
     }
 }

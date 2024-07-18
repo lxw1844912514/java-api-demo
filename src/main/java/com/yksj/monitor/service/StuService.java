@@ -53,4 +53,9 @@ public interface StuService {
      * @return
      */
    public Integer deleteStu(Stu stu);
+
+    /**
+     * 测试事务
+     */
+   public void testTrans();
 }

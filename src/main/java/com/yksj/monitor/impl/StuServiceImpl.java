@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
@@ -111,5 +113,26 @@ public class StuServiceImpl implements StuService {
         Integer res = stuMapper.deleteByExample(example);
 
         return res;
+    }
+
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void testTrans() {
+        //1.新增数据
+        //2.修改数据
+        //3.模拟发生异常
+        //4.观察 1和2 步骤 发生的数据变动，有没有影响到数据库
+        //5.处理事务实现事物的回滚，不然先前的事务回滚
+        stu.setName("test");
+        stu.setAge(22);
+        stu.setEmail("22@qq.com");
+        stuMapper.insert(stu);
+
+        int y = 100 / 0; //报错抛出异常： / by zero ，开启事务后，后边的数据不在变更
+
+        stu.setId(128);
+        stuMapper.deleteByPrimaryKey(stu.getId());
+
     }
 }
