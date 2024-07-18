@@ -154,9 +154,9 @@ public class StuController {
      * {{host}}/stu/updateStu2?name=QQ
      * postBody:
      * {
-     *     "name":"qaz",
-     *     "age":22,
-     *     "email":"11234@qq.com"
+     * "name":"qaz",
+     * "age":22,
+     * "email":"11234@qq.com"
      * }
      *
      * @param name
@@ -166,7 +166,7 @@ public class StuController {
      * @return
      */
     @PostMapping("updateStu2")
-    public JSONResult updateStu2(String name,Integer age,String email,@RequestBody Stu postStu
+    public JSONResult updateStu2(String name, Integer age, String email, @RequestBody Stu postStu
     ) {
         log.info("查询的名字：{}", name);
         log.info("查询的年龄：{}", age);
@@ -189,9 +189,30 @@ public class StuController {
 //        stu.setAge(stu.getAge());
 //        stu.setEmail(stu.getEmail());
 
-        Integer num = stuService.updateStu(postStu, name,age,email);
+        Integer num = stuService.updateStu(postStu, name, age, email);
         String msg = (num > 0) ? "更改成功" : "更改失败";
         log.info("修改数量：{}， 修改结果：{}", num, msg);
+        return JSONResult.ok(msg);
+    }
+
+    /**
+     * 删除用户
+     * {{host}}/stu/delStu?stuId=121
+     *
+     * @param stu
+     * @return
+     */
+    @PostMapping("delStu")
+    public JSONResult deleteStu(Stu stu, Integer stuId,String name) {
+
+        stu.setId(stuId);
+        stu.setName(name);
+        log.info("删除ID：" + stuId);
+        log.info("删除name：" + name);
+        log.info(stu.toString()); // Stu(id=null, name=ww, age=null, email=null) / Stu(id=121, name=ww, age=null, email=null)
+        Integer res = stuService.deleteStu(stu);
+        String msg = (res > 0) ? "删除成功" : "删除失败";
+        log.info("删除条数：{} 删除结果：{}", res, msg);
         return JSONResult.ok(msg);
     }
 }

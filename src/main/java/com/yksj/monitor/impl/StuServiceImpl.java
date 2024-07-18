@@ -22,6 +22,8 @@ public class StuServiceImpl implements StuService {
     private static final Logger log = LoggerFactory.getLogger(StuServiceImpl.class);
     @Autowired
     private StuMapper stuMapper;
+    @Autowired
+    private Stu stu;
 
     @Override
     public void savaStu(Stu stu) {
@@ -83,8 +85,6 @@ public class StuServiceImpl implements StuService {
 
     @Override
     public Integer updateStu(Stu stu, String name, Integer age, String email) {
-
-
         //查询的条件
         Example example = new Example(Stu.class);
         Example.Criteria criteria = example.createCriteria();
@@ -93,5 +93,23 @@ public class StuServiceImpl implements StuService {
 //        criteria.andEqualTo("email", email);     //等于
         return stuMapper.updateByExample(stu, example);
 //        return stuMapper.updateByExampleSelective(stu, example);
+    }
+
+    public Integer deleteStu(Stu stu) {
+        //删除对象三种方式
+        //1.根据主键删除
+        //  Integer res= stuMapper.deleteByPrimaryKey(stu.getId());
+
+        //2.根据对象中的属性值匹配做条件删除
+        // Integer res=  stuMapper.delete(stu);
+
+        //3.根据构建的example 进行条件删除
+        Example example = new Example(Stu.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("id", stu.getId());     //等于
+        criteria.andEqualTo("name", stu.getName());     //等于
+        Integer res = stuMapper.deleteByExample(example);
+
+        return res;
     }
 }

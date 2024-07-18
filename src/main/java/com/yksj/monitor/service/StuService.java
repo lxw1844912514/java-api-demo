@@ -46,4 +46,11 @@ public interface StuService {
     public Integer updateStu(Stu stu);
 
    public Integer updateStu(Stu stu, String name,Integer age,String email);
+
+    /**
+     * 删除用户
+     * @param stu
+     * @return
+     */
+   public Integer deleteStu(Stu stu);
 }
