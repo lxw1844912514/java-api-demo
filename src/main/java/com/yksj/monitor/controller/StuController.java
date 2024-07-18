@@ -127,4 +127,71 @@ public class StuController {
 //        List<Stu> stuList = stuService.queryByCondition("lxw",33);
         return JSONResult.ok(stuList);
     }
+
+    //分页展示
+    @GetMapping("pageList")
+    public JSONResult pageList(String name, Integer age, Integer page, Integer pageSize) {
+        List<Stu> stuList = stuService.queryByCondition(name, age, page, pageSize);
+        return JSONResult.ok(stuList);
+    }
+
+    @PostMapping("updateStu")
+    public JSONResult updateStu() {
+
+        stu.setId(1); // 修改id为1的数据
+        stu.setName("lxw-update");
+        stu.setAge(1234);
+        stu.setEmail("1234@qq.com");
+
+        Integer num = stuService.updateStu(stu);
+        String msg = (num > 0) ? "更改成功" : "更改失败";
+        log.info("修改数量：{}{}", num, msg);
+        return JSONResult.ok(msg);
+    }
+
+    /**
+     * 根据 updateByExample 修改
+     * {{host}}/stu/updateStu2?name=QQ
+     * postBody:
+     * {
+     *     "name":"qaz",
+     *     "age":22,
+     *     "email":"11234@qq.com"
+     * }
+     *
+     * @param name
+     * @param age
+     * @param email
+     * @param postStu
+     * @return
+     */
+    @PostMapping("updateStu2")
+    public JSONResult updateStu2(String name,Integer age,String email,@RequestBody Stu postStu
+    ) {
+        log.info("查询的名字：{}", name);
+        log.info("查询的年龄：{}", age);
+
+        //修改后的值
+//        stu.setName("test1");
+//        stu.setAge(11);
+//        stu.setEmail("1@163.com");
+//        log.info(map.toString());
+//        UpStu upStu=new Stu();
+
+//        Stu stu = new Stu();
+//        log.info("修改前："+stu.getName());
+//        log.info("postStu修改前："+postStu.getName());
+//        BeanUtils.copyProperties(postStu,stu);
+//
+//        log.info("修改后："+stu.getName());
+//        log.info("postStu修改后："+postStu.getName());
+//        stu.setName(stu.getName());
+//        stu.setAge(stu.getAge());
+//        stu.setEmail(stu.getEmail());
+
+        Integer num = stuService.updateStu(postStu, name,age,email);
+        String msg = (num > 0) ? "更改成功" : "更改失败";
+        log.info("修改数量：{}， 修改结果：{}", num, msg);
+        return JSONResult.ok(msg);
+    }
 }

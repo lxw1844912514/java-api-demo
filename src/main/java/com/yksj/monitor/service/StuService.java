@@ -22,9 +22,28 @@ public interface StuService {
 
     /**
      * 根据条件查询stu的list结果集
-     * @param id
+     * @param name
      * @param age
      * @return
      */
-    public List<Stu> queryByCondition(String id,Integer age);
+    public List<Stu> queryByCondition(String name,Integer age);
+
+    /**
+     * 根据条件查询stu的list结果集-分页展示
+     * @param name
+     * @param age
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    public List<Stu> queryByCondition(String name,Integer age,Integer page,Integer pageSize);
+
+    /**
+     * 修改stu到数据库
+     * @param stu
+     * @return
+     */
+    public Integer updateStu(Stu stu);
+
+   public Integer updateStu(Stu stu, String name,Integer age,String email);
 }
