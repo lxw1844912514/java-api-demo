@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yksj.monitor.entity.Stu;
 import com.yksj.monitor.mapper.StuMapper;
+import com.yksj.monitor.mapper.StuMapperCustom;
 import com.yksj.monitor.service.StuService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,9 @@ public class StuServiceImpl implements StuService {
     @Autowired
     private Stu stu;
 
+    @Autowired
+    private StuMapperCustom stuMapperCustom;
+
     @Override
     public void savaStu(Stu stu) {
         stuMapper.insert(stu);
@@ -40,6 +44,15 @@ public class StuServiceImpl implements StuService {
     public Stu queryById(String id) {
         Stu stu = stuMapper.selectByPrimaryKey(id);
         return stu;
+    }
+
+    @Override
+    public Stu queryByIdCustom(String id) {
+        List<Stu> list=stuMapperCustom.getStuById(id);
+        if (list!=null&& !list.isEmpty()){
+            return list.get(0);
+        }
+        return null;
     }
 
     //    方法一：适用于多种复杂查询的情况下，模糊查询，大于，小于等

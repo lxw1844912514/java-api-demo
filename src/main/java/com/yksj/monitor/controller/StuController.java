@@ -116,8 +116,13 @@ public class StuController {
     //    根据ID查询用户信息 {{host}}/stu/getStuById?stuId=111
     @GetMapping("getStuById")
     public JSONResult getStuById(String stuId) {
+        /*//方法一：
         Stu stu = stuService.queryById(stuId);
-        return JSONResult.ok(stu);
+        return JSONResult.ok(stu);*/
+
+        // 方法二：通过自定义的SQL查询
+        Stu stu1=stuService.queryByIdCustom(stuId);
+        return JSONResult.ok(stu1);
     }
 
     // 根据条件查询结果集   {{host}}/stu/getStuByCondition?name=test&age=1
@@ -221,4 +226,6 @@ public class StuController {
         stuService.testTrans();
         return JSONResult.ok();
     }
+
+
 }

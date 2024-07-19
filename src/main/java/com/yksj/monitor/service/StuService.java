@@ -21,6 +21,12 @@ public interface StuService {
     public Stu queryById(String id);
 
     /**
+     * 根据ID查询
+     * @param id
+     */
+    public Stu queryByIdCustom(String id);
+
+    /**
      * 根据条件查询stu的list结果集
      * @param name
      * @param age
