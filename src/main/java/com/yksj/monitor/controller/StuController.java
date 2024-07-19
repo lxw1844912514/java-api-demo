@@ -121,6 +121,13 @@ public class StuController {
         Stu stu = stuService.queryById(stuId);
         return JSONResult.ok(stu);*/
 
+        try {
+            Thread.sleep(3500);
+            log.warn("时间3500");
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         // 方法二：通过自定义的SQL查询
         Stu stu1=stuService.queryByIdCustom(stuId);
         return JSONResult.ok(stu1);

@@ -145,6 +145,11 @@
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>1.2.5</version>
         </dependency>-->
+        <!--引入spring-boot的aop实现-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
         <!--引入数据库的驱动-->
         <dependency>
             <groupId>mysql</groupId>

@@ -50,8 +50,8 @@ spring:
 mybatis:
   type-aliases-package: com.yksj.entity #所有数据库表逆向后--映射后的实体类【entity/pojo/Bean】
   mapper-locations: classpath:mapper/*.xml #所有mapper映射的文件所在的目录位置
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启mybatis的日志实现，可以在控制台打印输出SQL语句日志 ，生成环境要去掉，否则日志非常大
+  #configuration:
+   # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启mybatis的日志实现，可以在控制台打印输出SQL语句日志 ，生成环境要去掉，否则日志非常大
 #通用mapper配置
 mapper:
   mappers: com.yksj.monitor.my.mapper.MyMapper  #所有mapper都需要实现的接口
