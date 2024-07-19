@@ -3,8 +3,8 @@ server:
 
 spring:
   datasource:
-#    type: com.alibaba.druid.pool.DruidDataSource  #引入自定义的阿里云数据源
-#    type: com.zaxxer.hikari.HikariDataSource     #指定数据源的类型HikariDataSource
+    #    type: com.alibaba.druid.pool.DruidDataSource  #引入自定义的阿里云数据源
+    #    type: com.zaxxer.hikari.HikariDataSource     #指定数据源的类型HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/monitor?characterEncoding=utf-8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
@@ -27,8 +27,13 @@ spring:
 
     #  mvc:
     #    static-path-pattern: /static/**
-
     #静态资源文件配置，默认是 static 目录
+
+  #模版
+  thymeleaf:
+    prefix: classpath:/templates/html/
+    suffix: .html
+
   web:
     resources:
       static-locations:
@@ -51,12 +56,12 @@ mybatis:
   type-aliases-package: com.yksj.entity #所有数据库表逆向后--映射后的实体类【entity/pojo/Bean】
   mapper-locations: classpath:mapper/*.xml #所有mapper映射的文件所在的目录位置
   #configuration:
-   # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启mybatis的日志实现，可以在控制台打印输出SQL语句日志 ，生成环境要去掉，否则日志非常大
+  # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启mybatis的日志实现，可以在控制台打印输出SQL语句日志 ，生成环境要去掉，否则日志非常大
 #通用mapper配置
 mapper:
   mappers: com.yksj.monitor.my.mapper.MyMapper  #所有mapper都需要实现的接口
   not-empty: false #在进行数据库操作的时候，判断一个属性是否为空的时候，是否需要自动追加不为空字符串的判断
-                   # 例如 userName!=null 后面不需要 userName!=""
+  # 例如 userName!=null 后面不需要 userName!=""
   identity: MYSQL  #身份标识
 
 #分页插件助手的配置
