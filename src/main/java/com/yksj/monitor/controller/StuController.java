@@ -15,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.sql.DataSource;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
@@ -228,4 +229,11 @@ public class StuController {
     }
 
 
+    @Autowired
+    private DataSource dataSource;
+    //method如果不写的话，那么get，post方式都能进入方法，但是不安全
+    @RequestMapping(value = {"/say"},method = RequestMethod.GET)
+    public  String say(@RequestParam(value = "id",required = false,defaultValue = "0")String id){
+        return dataSource.toString();
+    }
 }

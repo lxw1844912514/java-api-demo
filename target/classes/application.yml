@@ -3,10 +3,21 @@ server:
 
 spring:
   datasource:
+#    type: com.alibaba.druid.pool.DruidDataSource  #引入自定义的阿里云数据源
+#    type: com.zaxxer.hikari.HikariDataSource     #指定数据源的类型HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/monitor?characterEncoding=utf-8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
     password: 123456
+    hikari:
+      connection-timeout: 30000     #等待连接池分配链接的最大时长（毫秒），超过这个时长断开？
+      minimum-idle: 5               #最小连接数
+      maximum-pool-size: 20         #最大连接数
+      auto-commit: true             #自动提交
+      idle-timeout: 600000          #连接超时的最大时长（豪秒），超时则被释放
+      pool-name: DataSourceHikariCP #连接池名字
+      max-lifetime: 1800000         #连接的生命时长（毫秒），超时而且没被使用则被释放
+      connection-test-query: SELECT 1
   banner:
     location: banner/fozu.txt
     #  mvc:
@@ -39,6 +50,8 @@ spring:
 mybatis:
   type-aliases-package: com.yksj.entity #所有数据库表逆向后--映射后的实体类【entity/pojo/Bean】
   mapper-locations: classpath:mapper/*.xml #所有mapper映射的文件所在的目录位置
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启mybatis的日志实现，可以在控制台打印输出SQL语句日志 ，生成环境要去掉，否则日志非常大
 #通用mapper配置
 mapper:
   mappers: com.yksj.monitor.my.mapper.MyMapper  #所有mapper都需要实现的接口
