@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>hello test!</h1>
+<!--<span th:text="${age}"></span>-->
+<!--<h2 th:text="${name}"></h2>-->
+
+<!--<h2 th:text="${stu.getName()}"></h2>-->
+
+
+<h2>{name=test22}</h2>
+
+<input value="{name=test22}"/>
+<br>
+
+<!--判断字符串是否为空-->
+<label>字符串是否为空</label>
+<span>false</span> <br>
+
+<!--判断字符串是否包含指定的字符-->
+<label>是否包含指定的字符</label>
+<span>true</span><br>
+
+<!--判断字符串以什么开头-->
+<label>判断字符串以t开头</label>
+<span>false</span><br>
+
+<!--判断字符串以什么结尾-->
+<label>判断字符串以2结尾</label>
+<span>false</span><br>
+
+<!--获取字符串长度-->
+<label>获取字符串长度</label>
+<span>13</span><br>
+
+<br>
+<br>
+<br>
+
+<label>默认时间格式</label>
+<span>Mon Jul 22 10:31:41 CST 2024</span><br>
+
+<label>默认格式化日期</label>
+<span>2024年7月22日 上午10时31分41秒</span><br>
+
+<label>指定格式日期</label>
+<span>2024-07-22 10:31:41</span><br>
+<span>2024-07-22 10:31:41</span><br>
+
+<hr>
+<label>判断:</label>
+<br>
+<span>男</span>
+
+<br>
+
+<span>
+ <span>男</span>
+ 
+ 
+</span>
+
+<br>
+循环
+<br>
+<span>
+   值： <span>java</span><br>
+   count: <span>1</span><br>
+   size <span>4</span><br>
+   index: <span>0</span><br>
+   first: <span>true</span><br>
+    last:<span>false</span><br>
+   odd奇数 : <span>true</span><br>
+    even偶数:<span>false</span><hr>
+</span><span>
+   值： <span>html</span><br>
+   count: <span>2</span><br>
+   size <span>4</span><br>
+   index: <span>1</span><br>
+   first: <span>false</span><br>
+    last:<span>false</span><br>
+   odd奇数 : <span>false</span><br>
+    even偶数:<span>true</span><hr>
+</span><span>
+   值： <span>php</span><br>
+   count: <span>3</span><br>
+   size <span>4</span><br>
+   index: <span>2</span><br>
+   first: <span>false</span><br>
+    last:<span>false</span><br>
+   odd奇数 : <span>true</span><br>
+    even偶数:<span>false</span><hr>
+</span><span>
+   值： <span>go</span><br>
+   count: <span>4</span><br>
+   size <span>4</span><br>
+   index: <span>3</span><br>
+   first: <span>false</span><br>
+    last:<span>true</span><br>
+   odd奇数 : <span>false</span><br>
+    even偶数:<span>true</span><hr>
+</span>
+<br>
+
+<span>
+<span>sex=1</span>
+<span>sex</span>
+<span>1</span><br>
+</span><span>
+<span>name=lxw</span>
+<span>name</span>
+<span>lxw</span><br>
+</span><span>
+<span>list=[java, html, php, go]</span>
+<span>list</span>
+<span>[java, html, php, go]</span><br>
+</span>
+
+<hr><hr>
+<!--<span th:text="${#request.getSession().getAttribute('token')}"></span>-->
+<!--<span th:text="${#session.getAttribute('token')}"></span>-->
+<!--<span th:text="${#request.getAttribute('englishName')}"></span>-->
+
+</body>
+</html>

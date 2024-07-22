@@ -2,6 +2,8 @@ server:
   port: 8001
 
 spring:
+  profiles:
+    active: dev  #走dev 配置文件中的环境
   datasource:
     #    type: com.alibaba.druid.pool.DruidDataSource  #引入自定义的阿里云数据源
     #    type: com.zaxxer.hikari.HikariDataSource     #指定数据源的类型HikariDataSource
