@@ -1,10 +1,12 @@
 package com.yksj.monitor.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
+@AllArgsConstructor
 public class Record extends BaseEntity {
     private int id;
     private int type_id;
@@ -28,8 +30,5 @@ public class Record extends BaseEntity {
     private Date created_at;
     private Date updated_at;
 
-    public Record() {
-        this.created_at = new Date();
-        this.updated_at = new Date();
-    }
+
 }
