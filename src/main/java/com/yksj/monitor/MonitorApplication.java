@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import tk.mybatis.spring.annotation.MapperScan;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.TimeZone;
 
 /**
@@ -19,13 +21,11 @@ import java.util.TimeZone;
 public class MonitorApplication {
 
     public static void main(String[] args) {
-        TimeZone timeZone = TimeZone.getTimeZone("Asia/Shanghai");
-        TimeZone.setDefault(timeZone);
+        // 设置全局时区
+        // TimeZone.setDefault(TimeZone.getTimeZone("Asia/Shanghai"));
+
         SpringApplication.run(MonitorApplication.class, args);
     }
 
-    void setDefaultTimezone() {
-        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Shanghai"));
-        //TimeZone.setDefault(TimeZone.getTimeZone("GMT+8"));
-    }
+
 }
