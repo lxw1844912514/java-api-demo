@@ -9,24 +9,24 @@ import java.util.Date;
 @AllArgsConstructor
 public class Record extends BaseEntity {
     private int id;
-    private int type_id;
+    private int typeId;
     private String names;
     private String image;
     private String command;
-    private String container_id;
+    private String containerId;
     private String created;
     private String status;
     private String state;
     private String ports;
     private String cpu;
-    private String mem_usage;
-    private String mem_perc;
-    private String net_input_out;
-    private String block_input_out;
+    private String memUsage;
+    private String memPerc;
+    private String netInputOut;
+    private String blockInputOut;
     private String pids;
-    private String restart_count;
-    private Date created_at;
-    private Date updated_at;
+    private String restartCount;
+    private Date createdAt;
+    private Date updatedAt;
 
 
     public Record() {

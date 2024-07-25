@@ -16,6 +16,10 @@ public class Page<T> {
         this.data = data;
     }
 
+    public List<T> getData() {
+        return data;
+    }
+
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
     }
@@ -24,23 +28,20 @@ public class Page<T> {
         return pageNum;
     }
 
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public List<T> getData() {
-        return data;
-    }
-
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
 
+    public int getPageSize() {
+        return pageSize;
+    }
+
+
     public void setTotal(int total) {
         this.total = total;
+    }
+
+    public int getTotal() {
+        return total;
     }
 }

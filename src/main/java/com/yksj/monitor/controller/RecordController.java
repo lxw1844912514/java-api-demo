@@ -25,12 +25,10 @@ import java.util.*;
 @RequestMapping("/record")
 public class RecordController {
     private static final Logger log = LoggerFactory.getLogger(RecordController.class);
-    private final Date currentTime = new Date();
     @Resource
     RecordMapper recordMapper;
     @Resource
     ServiceTypeMapper serviceTypeMapper;
-
     @Autowired
     private ToolService toolService;
 
@@ -38,6 +36,7 @@ public class RecordController {
     //    添加日志记录
     @PostMapping("addRecord")
     public JSONResult addRecord(@RequestBody String args) {
+        Date currentTime = new Date();
         Record record = new Record();
         String[] jsonInput = args.split("&");
         log.info("接受参数：" + args);
@@ -63,8 +62,8 @@ public class RecordController {
 
 //            log.info(String.valueOf(type_id));
 //            log.info("Names:"+map.get("Names"));
-            record.setType_id(type_id);
-            record.setContainer_id(map.get("ID"));
+            record.setTypeId(type_id);
+            record.setContainerId(map.get("ID"));
             record.setImage(map.get("Image"));
             record.setCommand(map.get("Command").trim());
             record.setImage(map.get("Image"));
@@ -74,13 +73,13 @@ public class RecordController {
             record.setPorts(map.get("Ports"));
             record.setNames(map.get("Names"));
 
-            record.setBlock_input_out(dockerStatMap.get("BlockIO"));
+            record.setBlockInputOut(dockerStatMap.get("BlockIO"));
             record.setCpu(dockerStatMap.get("CPUPerc"));
-            record.setMem_perc(dockerStatMap.get("MemPerc"));
-            record.setMem_usage(dockerStatMap.get("MemUsage"));
-            record.setNet_input_out(dockerStatMap.get("NetIO"));
+            record.setMemPerc(dockerStatMap.get("MemPerc"));
+            record.setMemUsage(dockerStatMap.get("MemUsage"));
+            record.setNetInputOut(dockerStatMap.get("NetIO"));
             record.setPids(dockerStatMap.get("PIDs"));
-            record.setRestart_count(restartCountMap.get("restartCount"));
+            record.setRestartCount(restartCountMap.get("restartCount"));
 
         } catch (Exception e) {
             log.error("数据接受处理失败：" + args);
@@ -88,8 +87,8 @@ public class RecordController {
         }
 
 
-        record.setCreated_at(currentTime);
-        record.setUpdated_at(currentTime);
+        record.setCreatedAt(currentTime);
+        record.setUpdatedAt(currentTime);
         log.info("入表参数：" + record.toString());
 
         // 如果运行状态停止，则同步更新服务类型表的状态
@@ -99,7 +98,7 @@ public class RecordController {
             Integer state = toolService.getStatuMapKey(record.getState());
             serviceType.setUpdated_at(currentTime);
             serviceType.setState(state);
-            serviceType.setId(record.getType_id());
+            serviceType.setId(record.getTypeId());
             //log.info("更新：" + serviceType);
             //log.info("state:" + state + ",typeId:" + record.getType_id());
             serviceTypeMapper.updateStateById(serviceType);
@@ -144,6 +143,8 @@ public class RecordController {
         List<Record> recordData = recordMapper.findByPage(typeId, createTime, offset, pageSize);
         Page<Record> page = new Page<>();
         page.setData(recordData);
+
+        log.info(recordData.toString());
 
         int total = recordMapper.countRecord(typeId, createTime);
         page.setTotal(total);

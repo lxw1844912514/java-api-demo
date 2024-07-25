@@ -19,8 +19,8 @@ public interface RecordMapper {
             "type_id`,`container_id`,`image`,`command`,`created`,`state`,`status`,`ports`,`names`,`cpu`,`mem_usage`," +
             "`mem_perc`,`net_input_out`,`block_input_out`,`pids`,`restart_count`,`created_at`,`updated_at`) " +
             "VALUES " +
-            "(#{type_id},#{container_id},#{image},#{command},#{created},#{state},#{status},#{ports},#{names},#{cpu},#{mem_usage}," +
-            "#{mem_perc},#{net_input_out},#{block_input_out},#{pids},#{restart_count},#{created_at},#{updated_at})")
+            "(#{typeId},#{containerId},#{image},#{command},#{created},#{state},#{status},#{ports},#{names},#{cpu},#{memUsage}," +
+            "#{memPerc},#{netInputOut},#{blockInputOut},#{pids},#{restartCount},#{createdAt},#{updatedAt})")
     @Transactional
     Integer save(Record record);
 
