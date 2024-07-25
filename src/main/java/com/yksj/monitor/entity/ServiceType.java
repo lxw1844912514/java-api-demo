@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javafx.util.converter.LocalDateTimeStringConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
+//@AllArgsConstructor
+//@NoArgsConstructor
 public class ServiceType {
     private int id;
     private String name;

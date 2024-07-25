@@ -23,7 +23,12 @@ public interface ServiceTypeMapper {
 
     @Update("UPDATE `service_type` SET `state` = #{state},`name`=#{name},`ip`=#{ip}, `listen_name`=#{listen_name} ,`updated_at`= #{updated_at} WHERE `id` = #{id}")
     @Transactional
-    public Integer updateById(ServiceType serviceType);
+     Integer updateById(ServiceType serviceType);
+
+    @Update("UPDATE `service_type` SET `state` = #{state},`updated_at`= #{updated_at} WHERE `id` = #{id}")
+    @Transactional
+    Integer updateStateById(ServiceType serviceType);
+
 
     @Delete("delete from `service_type` where `id`=#{id}")
     @Transactional

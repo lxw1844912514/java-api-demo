@@ -3,6 +3,7 @@ package com.yksj.monitor.controller;
 import com.yksj.monitor.entity.ServiceType;
 import com.yksj.monitor.mapper.ServiceTypeMapper;
 import com.yksj.monitor.utils.JSONResult;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -11,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
+@Slf4j
 @RestController
 @RequestMapping("/service")
 public class ServiceTypeController {
@@ -40,6 +42,7 @@ public class ServiceTypeController {
     public JSONResult updateSerType(@RequestBody ServiceType serviceType) {
         serviceType.setUpdated_at(currentTime);
         Integer res = serviceTypeMapper.updateById(serviceType);
+        log.info(serviceType.toString());
         String msg = (res > 0) ? "更新成功" : "更新失败";
         return JSONResult.ok(msg);
     }

@@ -16,11 +16,11 @@ public interface RecordMapper {
 
     // 添加记录
     @Update("INSERT INTO `record`(`" +
-            "type_id`,`container_id`,`image`,`command`,`created`,`status`,`ports`,`names`,`cpu`,`mem_usage`,`mem_limit`," +
-            "`mem`,`net_input`,`net_out`,`block_input`,`block_out`,`pids`,`restart_count`,`created_at`,`updated_at`) " +
+            "type_id`,`container_id`,`image`,`command`,`created`,`state`,`status`,`ports`,`names`,`cpu`,`mem_usage`," +
+            "`mem_perc`,`net_input_out`,`block_input_out`,`pids`,`restart_count`,`created_at`,`updated_at`) " +
             "VALUES " +
-            "(#{type_id},#{container_id},#{image},#{command},#{created},#{status},#{ports},#{names},#{cpu},#{mem_usage},#{mem_limit}," +
-            "#{mem},#{net_input},#{net_out},#{block_input},#{block_out},#{pids},#{restart_count},#{created_at},#{updated_at})")
+            "(#{type_id},#{container_id},#{image},#{command},#{created},#{state},#{status},#{ports},#{names},#{cpu},#{mem_usage}," +
+            "#{mem_perc},#{net_input_out},#{block_input_out},#{pids},#{restart_count},#{created_at},#{updated_at})")
     @Transactional
     Integer save(Record record);
 

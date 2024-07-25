@@ -16,19 +16,20 @@ public class Record extends BaseEntity {
     private String container_id;
     private String created;
     private String status;
+    private String state;
     private String ports;
     private String cpu;
     private String mem_usage;
-    private String mem_limit;
-    private String mem;
-    private String net_input;
-    private String net_out;
-    private String block_input;
-    private String block_out;
+    private String mem_perc;
+    private String net_input_out;
+    private String block_input_out;
     private String pids;
-    private int restart_count;
+    private String restart_count;
     private Date created_at;
     private Date updated_at;
 
 
+    public Record() {
+
+    }
 }
