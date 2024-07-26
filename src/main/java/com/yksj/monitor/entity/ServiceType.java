@@ -15,16 +15,15 @@ import java.util.Date;
 public class ServiceType {
     private int id;
     private String name;
-    private String listen_name;
+    private String listenName;
     private int state;
-    private int is_docker;
+    private int isDocker;
     private String ip;
+    private Date createdAt;
+    private Date updatedAt;
 
     // @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date created_at;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 //    private LocalDateTime updated_at;
-    private Date updated_at;
 
 }

@@ -24,14 +24,15 @@ public class ServiceTypeController {
     @GetMapping("list")
     public JSONResult getTypes() {
         List<ServiceType> serviceTypeList = serviceTypeMapper.types();
+        log.info(serviceTypeList.toString());
         return JSONResult.ok(serviceTypeList);
     }
 
     //添加服务类型
     @PostMapping("addServiceType")
     public JSONResult addServiceType(@RequestBody ServiceType serviceType) {
-        serviceType.setCreated_at(currentTime);
-        serviceType.setUpdated_at(currentTime);
+        serviceType.setCreatedAt(currentTime);
+        serviceType.setUpdatedAt(currentTime);
         Integer res = serviceTypeMapper.save(serviceType);
         String msg = (res > 0) ? "添加成功" : "添加失败";
         return JSONResult.ok(msg);
@@ -40,7 +41,7 @@ public class ServiceTypeController {
     //修改服务类型
     @PostMapping("updateSerType")
     public JSONResult updateSerType(@RequestBody ServiceType serviceType) {
-        serviceType.setUpdated_at(currentTime);
+        serviceType.setUpdatedAt(currentTime);
         Integer res = serviceTypeMapper.updateById(serviceType);
         log.info(serviceType.toString());
         String msg = (res > 0) ? "更新成功" : "更新失败";

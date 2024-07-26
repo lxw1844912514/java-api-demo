@@ -114,7 +114,7 @@ public class RecordController {
             ServiceType serviceType = new ServiceType();
             //获取容器非正常运行状态对应的key
             Integer state = toolService.getStatuMapKey(record.getState());
-            serviceType.setUpdated_at(currentTime);
+            serviceType.setUpdatedAt(currentTime);
             serviceType.setState(state);
             serviceType.setId(record.getTypeId());
             //log.info("更新：" + serviceType);
