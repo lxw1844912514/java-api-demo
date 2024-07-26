@@ -1,5 +1,6 @@
 package com.yksj.monitor.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yksj.monitor.entity.Record;
@@ -35,20 +36,20 @@ public class RecordController {
 
     //    添加日志记录
     @PostMapping("addRecord")
-    public JSONResult addRecord(@RequestBody String args) {
+    public JSONResult addRecord(@RequestBody String args) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
         Date currentTime = new Date();
         Record record = new Record();
-        String[] jsonInput = args.split("&");
         log.info("接受参数：" + args);
 
-//         for (String item: jsonInput){
-//            System.out.println(item);
-//        }
-//        System.out.println(Arrays.toString(jsonInput));
-
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, String> map = null;
-        try {
+        // 包含&符号的是docker服务，不包含的是curl或supervisorctl等服务
+        if (args.contains("&")) { //docker服务
+            String[] jsonInput = args.split("&");
+         /*for (String item: jsonInput){
+            System.out.println(item);
+        }
+        System.out.println(Arrays.toString(jsonInput));*/
+            Map<String, String> map;
             // 将JSON字符串转换为Map对象
             map = mapper.readValue(jsonInput[0], new TypeReference<Map<String, String>>() {
             });
@@ -59,9 +60,6 @@ public class RecordController {
 
             // 数据整理
             int type_id = toolService.array_search_string(map.get("Names")) + 1;
-
-//            log.info(String.valueOf(type_id));
-//            log.info("Names:"+map.get("Names"));
             record.setTypeId(type_id);
             record.setContainerId(map.get("ID"));
             record.setImage(map.get("Image"));
@@ -80,19 +78,39 @@ public class RecordController {
             record.setNetInputOut(dockerStatMap.get("NetIO"));
             record.setPids(dockerStatMap.get("PIDs"));
             record.setRestartCount(restartCountMap.get("restartCount"));
+        } else if (args.contains("#")) { // 客户端服务器，管理端supervisorctl
+            String[] curlInput = args.split("#");
+            Map<String, String> superMap = mapper.readValue(curlInput[0], new TypeReference<Map<String, String>>() {
+            });
+            Map<String, String> typeMap = mapper.readValue(curlInput[1], new TypeReference<Map<String, String>>() {
+            });
 
-        } catch (Exception e) {
-            log.error("数据接受处理失败：" + args);
-            e.printStackTrace();
+            //整理数据
+            int type_id = toolService.array_search_string(typeMap.get("type")) + 1;
+            record.setTypeId(type_id);
+            record.setNames(superMap.get("name"));
+            record.setPids(superMap.get("pid"));
+            record.setState(superMap.get("status"));
+            record.setStatus(superMap.get("time"));
+        } else { // tts服务,NLP服务端/NLP客户端
+            Map<String, String> curlMap = mapper.readValue(args, new TypeReference<Map<String, String>>() {
+            });
+
+            //整理数据
+            int type_id = toolService.array_search_string(curlMap.get("name")) + 1;
+            record.setTypeId(type_id);
+            record.setNames(curlMap.get("name"));
+            record.setHttpCode(curlMap.get("http_code"));
+            record.setTimeTotal(curlMap.get("time_total"));
+            record.setState(curlMap.get("http_code"));
         }
-
 
         record.setCreatedAt(currentTime);
         record.setUpdatedAt(currentTime);
-        log.info("入表参数：" + record.toString());
+        log.info("入表参数：" + record);
 
         // 如果运行状态停止，则同步更新服务类型表的状态
-        if (!Objects.equals(record.getState(), "running")) {
+        if (!Objects.equals(record.getState(), "running") || !Objects.equals(record.getState(), "RUNNING")|| !Objects.equals(record.getState(), "200")) {
             ServiceType serviceType = new ServiceType();
             //获取容器非正常运行状态对应的key
             Integer state = toolService.getStatuMapKey(record.getState());

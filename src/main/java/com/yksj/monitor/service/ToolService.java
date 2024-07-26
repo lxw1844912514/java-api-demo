@@ -14,7 +14,7 @@ public class ToolService {
      * @return
      */
     public int array_search_string(String value) {
-        String[] array = {"mysql", "redis", "rabbitmq", "mongo", "elasticsearch", "node_grpc", "ttl", "nlp", "client", "asr"};
+        String[] array = {"mysql", "redis", "rabbitmq", "mongo", "elasticsearch", "asr", "node_grpc", "supervisorctl_server", "ttl", "nlp_server", "nlp_client", "supervisorctl_client"};
         return Arrays.asList(array).indexOf(value);
     }
 
@@ -33,6 +33,18 @@ public class ToolService {
         map.put(6, "exited"); //停止
         map.put(7, "dead"); //死亡
 
+        //supervisorctrl status
+        map.put(8, "STOPPED");      //STOPPED：进程因为停止请求而停止，或从未启动过
+        map.put(9, "STARTING");     //STARTING：过程因为启动请求，正在启动中
+        map.put(10, "RUNNING");     //RUNNING：进程正常运行中
+        map.put(11, "BACKOFF");     //BACKOFF：进程进入了STARTING状态，但随后退出太快而无法转移到RUNNING状态。
+        map.put(12, "STOPPING");    //STOPPING：进程由于停止请求正在停止中
+        map.put(13, "EXITED");      //EXITED：进程从RUNNING状态退出（可能正常，也可能异常）
+        map.put(14, "FATAL");       //FATAL：进程无法成功启动
+        map.put(15, "UNKNOWN");     //UNKNOWN：未知状态（考虑supervisor出错）
+
+        map.put(16, "200");     //curl正常响应状态码
+        map.put(17, "500");     //
         return map;
     }
 

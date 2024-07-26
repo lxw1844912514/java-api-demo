@@ -30,10 +30,11 @@ public class SprintBootConfig implements WebMvcConfigurer {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // 对所有路径应用规则
-                        .allowedOrigins("localhost", "192.168.1.247") // 允许任何域
+                        .allowedOrigins("*") // 允许任何域
+                        //.allowedOrigins("localhost", "192.168.1.247","http://localhost:5173") // 允许任何域
                         .allowedMethods("GET", "POST", "PUT", "DELETE") // 允许的方法
-                        .allowedHeaders("*") // 允许的头
-                        .allowCredentials(true); // 是否允许凭据
+                        .allowedHeaders("*");// 允许的头
+                        //.allowCredentials(true); // 是否允许凭据,allowCredentials 为true 时，allowedOrigins不能为“*”
             }
         };
     }

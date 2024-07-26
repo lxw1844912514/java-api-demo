@@ -25,6 +25,8 @@ public class Record extends BaseEntity {
     private String blockInputOut;
     private String pids;
     private String restartCount;
+    private String httpCode;
+    private String timeTotal;
     private Date createdAt;
     private Date updatedAt;
 
