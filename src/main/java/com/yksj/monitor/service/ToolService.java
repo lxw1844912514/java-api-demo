@@ -14,7 +14,7 @@ public class ToolService {
      * @return
      */
     public int array_search_string(String value) {
-        String[] array = {"mysql", "redis", "rabbitmq", "mongo", "elasticsearch", "asr", "node_grpc", "supervisorctl_server", "ttl", "nlp_server", "nlp_client", "supervisorctl_client"};
+        String[] array = {"mysql", "redis", "rabbitmq", "mongodb", "elasticsearch", "asr", "node_grpc", "supervisorctl_server", "ttl", "nlp_server", "nlp_client", "supervisorctl_client"};
         return Arrays.asList(array).indexOf(value);
     }
 

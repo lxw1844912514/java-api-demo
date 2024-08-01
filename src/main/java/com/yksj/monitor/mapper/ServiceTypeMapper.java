@@ -17,15 +17,15 @@ public interface ServiceTypeMapper {
     @Select("SELECT * FROM `service_type` LIMIT 0,1000")
     List<ServiceType> types();
 
-    @Update("INSERT INTO `service_type`(`name`, `listen_name`, `state`,`is_docker`,`ip`,`created_at`,`updated_at`) VALUES (#{name},#{listen_name},#{state},#{is_docker},#{ip},#{created_at},#{updated_at})")
+    @Update("INSERT INTO `service_type`(`name`, `listen_name`, `state`,`is_docker`,`ip`,`created_at`,`updated_at`) VALUES (#{name},#{listenName},#{state},#{isDocker},#{ip},#{createdAt},#{updatedAt})")
     @Transactional
     Integer save(ServiceType serviceType);
 
-    @Update("UPDATE `service_type` SET `state` = #{state},`name`=#{name},`ip`=#{ip}, `listen_name`=#{listen_name} ,`updated_at`= #{updated_at} WHERE `id` = #{id}")
+    @Update("UPDATE `service_type` SET `state` = #{state},`name`=#{name},`ip`=#{ip}, `listen_name`=#{listenName} ,`updated_at`= #{updatedAt} WHERE `id` = #{id}")
     @Transactional
      Integer updateById(ServiceType serviceType);
 
-    @Update("UPDATE `service_type` SET `state` = #{state},`updated_at`= #{updated_at} WHERE `id` = #{id}")
+    @Update("UPDATE `service_type` SET `state` = #{state},`updated_at`= #{updatedAt} WHERE `id` = #{id}")
     @Transactional
     Integer updateStateById(ServiceType serviceType);
 

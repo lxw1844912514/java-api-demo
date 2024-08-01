@@ -59,7 +59,14 @@ public class RecordController {
             });
 
             // 数据整理
-            int type_id = toolService.array_search_string(map.get("Names")) + 1;
+            int type_id;
+            if (map.get("Names").contains("apes") || map.get("Names").contains("nls-cloud-")) { //asr服务器有多个docker容器
+           // if (map.get("Names").contains("suspicious_lewin") || map.get("Names").contains("webserver")) {
+                type_id = toolService.array_search_string("asr") + 1;
+            } else {
+                type_id = toolService.array_search_string(map.get("Names")) + 1;
+            }
+
             record.setTypeId(type_id);
             record.setContainerId(map.get("ID"));
             record.setImage(map.get("Image"));
@@ -110,15 +117,16 @@ public class RecordController {
         log.info("入表参数：" + record);
 
         // 如果运行状态停止，则同步更新服务类型表的状态
-        if (!Objects.equals(record.getState(), "running") || !Objects.equals(record.getState(), "RUNNING")|| !Objects.equals(record.getState(), "200")) {
+        if (!Objects.equals(record.getState(), "running") && !Objects.equals(record.getState(), "RUNNING") && !Objects.equals(record.getState(), "200")) {
             ServiceType serviceType = new ServiceType();
             //获取容器非正常运行状态对应的key
             Integer state = toolService.getStatuMapKey(record.getState());
             serviceType.setUpdatedAt(currentTime);
             serviceType.setState(state);
             serviceType.setId(record.getTypeId());
-            //log.info("更新：" + serviceType);
-            //log.info("state:" + state + ",typeId:" + record.getType_id());
+
+            log.info("更新：" + serviceType);
+            log.info("state:" + state + ",currentTime:" + record.getUpdatedAt());
             serviceTypeMapper.updateStateById(serviceType);
         }
 

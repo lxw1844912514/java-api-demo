@@ -1,4 +1,8 @@
 server:
   port: 8001
 
+#线上服务
+#spring:
+#  datasource:
+#    password: Eshop123qaz!
 
